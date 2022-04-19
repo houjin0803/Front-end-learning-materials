@@ -80,21 +80,16 @@
 
 - `a`标签的`href`和`target`：href规定链接的URL。target有以下属性：
 - ![image](https://user-images.githubusercontent.com/64902360/164011699-0ec71b31-c44a-4162-8ed8-14bd9a77cd12.png)
-
 - `img`标签的`src`和`alt`属性。src规定显示图像的 URL；alt:图片不可用时候，文字显示出来
 - `table td`标签的`colspan`和`rowspan`：`colspan`规定单元格可以横跨的列数，`rowspan`规定单元格可以横跨的行数
 - `form的target method以及enctype`：target规定表单提交到哪里，method有get和post，规定发送form-data的HTTP方法。enctype:指定编码，如果上传文件指定要用form-data
 - `input的type,value`：type有以下属性值，value规定input元素的值。
 ![image](https://user-images.githubusercontent.com/64902360/164011939-6f75848d-82e4-46cb-9a3e-e570a58ad742.png)
-
 - `button的type`：如下所示。
 ![image](https://user-images.githubusercontent.com/64902360/164012034-5c795205-0ef4-4ca9-9e6b-91be00807a7f.png)
-
 - `select的option`：option 元素定义下拉列表中的一个选项（一个条目），它有以下属性：
 ![image](https://user-images.githubusercontent.com/64902360/164012210-aa34685a-02da-417f-8494-9917d4875caf.png)
-
 - `label`：label与input元素进行关联，\<label> 标签为 input 元素定义标注。\<label> 标签的 for 属性应当与相关元素的 id 属性相同。
-
   ```html
   <form>
     <label for="male">Male</label>
