@@ -79,8 +79,7 @@
 ## 2、HTML重要属性
 
 - `a`标签的`href`和`target`：href规定链接的URL。target有以下属性：
-
-![image-20220419201811333](G:\typora插入图片\image-20220419201811333.png)
+- ![image](https://user-images.githubusercontent.com/64902360/164011699-0ec71b31-c44a-4162-8ed8-14bd9a77cd12.png)
 
 - `img`标签的`src`和`alt`属性。src规定显示图像的 URL；alt:图片不可用时候，文字显示出来
 - `table td`标签的`colspan`和`rowspan`：`colspan`规定单元格可以横跨的列数，`rowspan`规定单元格可以横跨的行数
