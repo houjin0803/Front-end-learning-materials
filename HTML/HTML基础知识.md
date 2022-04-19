@@ -85,16 +85,13 @@
 - `table td`标签的`colspan`和`rowspan`：`colspan`规定单元格可以横跨的列数，`rowspan`规定单元格可以横跨的行数
 - `form的target method以及enctype`：target规定表单提交到哪里，method有get和post，规定发送form-data的HTTP方法。enctype:指定编码，如果上传文件指定要用form-data
 - `input的type,value`：type有以下属性值，value规定input元素的值。
-
-![image-20220419202800317](G:\typora插入图片\image-20220419202800317.png)
+![image](https://user-images.githubusercontent.com/64902360/164011939-6f75848d-82e4-46cb-9a3e-e570a58ad742.png)
 
 - `button的type`：如下所示。
-
-![image-20220419202921352](G:\typora插入图片\image-20220419202921352.png)
+![image](https://user-images.githubusercontent.com/64902360/164012034-5c795205-0ef4-4ca9-9e6b-91be00807a7f.png)
 
 - `select的option`：option 元素定义下拉列表中的一个选项（一个条目），它有以下属性：
-
-![image-20220419203157141](G:\typora插入图片\image-20220419203157141.png)
+![image](https://user-images.githubusercontent.com/64902360/164012210-aa34685a-02da-417f-8494-9917d4875caf.png)
 
 - `label`：label与input元素进行关联，\<label> 标签为 input 元素定义标注。\<label> 标签的 for 属性应当与相关元素的 id 属性相同。
 
