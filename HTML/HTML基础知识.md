@@ -100,5 +100,36 @@
   </form>
   ```
 
-  
 
+## 3、HTML作用
+
+- 对机器友好，有利于SEO
+- 开发者友好，增强了可读性，结构更加清晰
+
+## 4、HTML5新增内容
+
+- 新增语义化标签
+  - `header`：元素代表 网页 或section的页眉
+  - `section`：元素代表文档的 节或者段
+  - `article`：标签定义外部的内容
+  - `nav`：元素代表页面的导航链接区域。用于定于页面的主要导航部分
+  - `aside`：元素被包含在article元素中作为主要内容的附属信息部分;最典型的是侧边栏
+  - `footer`：标签定义文档或节的页脚
+
+- 新增视频音频标签
+
+  - `video`：视频标签，常见属性如下
+
+    ![image-20220420095915327](G:\typora插入图片\image-20220420095915327.png)
+
+  - `audio`：音频标签，常见属性如下
+
+    ![image-20220420095955903](G:\typora插入图片\image-20220420095955903.png)
+
+  - 表单增强(新的元素，表单验证)
+    - 新的元素：url、email、number、range、date、month、week、time、datetime、search、tel、color
+
+  - `Canvas`+`WEBGL`等技术，实现无插件的动画以及图像、图形处理能力
+  - 本地存储，可实现`offline`应用；
+  - `websocket`，一改`http`的纯`pull`模型，实现数据推送的梦想；
+  - MathML，SVG等，支持更加丰富的render

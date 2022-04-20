@@ -1,5 +1,9 @@
 # 一、链表
 
+什么是链表？链表就是通过指针将节点连接在一起的线性结构。每一个节点由两部分组成：数据域和指针域（存放下一个节点的指针），最后一个指针指向null（空指针的意思），如下所示：
+
+![image-20220420104446719](G:\typora插入图片\image-20220420104446719.png)
+
 ## 1、链表反转
 
 - 链接：https://leetcode-cn.com/problems/reverse-linked-list/
@@ -21,6 +25,36 @@
           cur = next
       }
       return pre
+  };
+  ```
+
+
+## 2、环形链表
+
+- 链接：https://leetcode-cn.com/problems/linked-list-cycle/
+
+- 思路
+
+  本题还是使用指针来完成，这题要求看链表中是否存在环，这里可以使用快慢指针。这里可以用生活中的一个例子来解释：操场上跑步，操场是一个环，A和B两个人。一个人速度快，一个人速度慢，那么他们从同一起点开始跑，那么肯定存在某一时刻，他们相遇。这里一样，假设慢指针每次移动一个距离，快指针每次移动两个距离，那么如果存在环的话，他们一定会相遇。如果说不存在环，那么快指针一定先到达链表的尾端，也就是null。
+
+- 代码
+
+  ```js
+  var hasCycle = function(head) {
+      //使用快慢指针，快指针每次移动一个，慢指针每次移动两位，如果存在环，那么慢指针肯定会和快指针相遇
+      if(head === null){
+          return false
+      }
+      let slow = head
+      let fast = head
+      while(fast.next && fast.next.next){ //注意循环的条件，两个缺一不可。
+          slow = slow.next
+          fast = fast.next.next
+          if(slow == fast){
+              return true
+          }
+      }
+      return false
   };
   ```
 
