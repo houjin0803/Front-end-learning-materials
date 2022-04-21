@@ -1,6 +1,6 @@
 # 一、HTML常见元素和理解
 
-## 1、HTML常见元素分类
+## 1、HTML常见元素
 
 ### 1.1 head区元素（这部分不会在页面上留下直接内容）
 
@@ -73,7 +73,7 @@
 
 ### 1.2 body区元素
 
-- 行内元素：`a b span  select strong em img(inline-block) input(inline-block) button(inline-block)  textarea (inline-block) video(inline-block)  audio(inlie-block)`
+- 行内元素：`a b span  strong em select(inline-block) img(inline-block) input(inline-block) button(inline-block)  textarea (inline-block) video(inline-block)  audio(inlie-block)`
 - 块级元素：`div  p ul ol li dl dt dd h1 h2 h3 h4 h5 h6  header section aside footer article table thead tbody tr td form   `
 
 ## 2、HTML重要属性
@@ -127,9 +127,43 @@
     ![image-20220420095955903](G:\typora插入图片\image-20220420095955903.png)
 
   - 表单增强(新的元素，表单验证)
-    - 新的元素：url、email、number、range、date、month、week、time、datetime、search、tel、color
+    - 新的元素：`url、email、number、range、date、month、week、time、datetime、search、tel、color`
 
   - `Canvas`+`WEBGL`等技术，实现无插件的动画以及图像、图形处理能力
+  
   - 本地存储，可实现`offline`应用；
+  
   - `websocket`，一改`http`的纯`pull`模型，实现数据推送的梦想；
+  
   - MathML，SVG等，支持更加丰富的render
+
+## 5、元素分类
+
+- 默认样式分类
+
+  - 块级元素 (`display: block`)
+
+    特点：1、会独占一行，不管内容的长度；2、块级元素的宽度会自动填满其父元素的宽度；3、可以设置`margin、padding、width、height`。
+
+    元素：`duv p ul  li table form`等
+
+  - 行内元素（`display:inline`）
+
+    特点：1、不会独占一行，会紧跟排列，知道没有空间为止；2、设置width、height无效；3、水平方向上设置`margin、padding`有效，垂直方向上设置无效。
+
+    元素：`a b span  select strong em` 
+
+  - 行内块元素：(`display: inlie-block`)
+
+    特点：具有块级元素的特点，也有行内元素的特点。1、不会独占一行，一行中可以放多个行内块元素，但是之间会有空隙，设置它的上一级font-size为0，才会消除间隙。2、可以设置元素的宽度和高度
+
+    元素：`img input textarea  select buttoon video audio`
+
+- 嵌套关系
+  - 块级元素可以包含行内元素
+  - 块级元素不一定包含块级元素（p标签不能包含div）
+  - 行内元素一般不能包含块级元素
+
+- 默认样式和reset
+
+  HTML标签在浏览器中都有默认的样式，不同的浏览器的默认样式之间存在差别。例如ul默认带有缩进样式，在IE下，它的缩进是由margin实现的，而在Firefox下却是由padding实现的。开发时浏览器的默认样式可能会给我们带来多浏览器兼容性问题，影响开发效率。现在很流行的解决方式是一开始就将浏览器的默认样式全部覆盖掉，这就是css reset。[Normalize.css](http://necolas.github.io/normalize.css/) 只是一个很小的CSS文件，但它在默认的HTML元素样式上提供了跨浏览器的高度一致性。相比于传统的`CSS reset`，`Normalize.css`是一种现代的、为[HTML5](https://so.csdn.net/so/search?q=HTML5&spm=1001.2101.3001.7020)准备的优质替代方案。

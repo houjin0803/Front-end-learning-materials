@@ -58,4 +58,55 @@
   };
   ```
 
+
+## 3、链表中第K个节点
+
+- 链接：https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/
+
+- 思路
+
+  本题有两个思路，第一个是顺序查找法，第二个是双指针法
+
+  - 顺序查找法：顺序查找法的思路应该很容易想到，即先求出链表的长度len，然后再找出第n-k个节点即可。
+  - 双指针法：可以设置两个指针，一个慢指针，指向头节点，一个快指针指向第k+1个节点，这样的话快慢指针的距离就是K了，那么他们两同时移动，当快指针移动到尾部null的地方时，慢指针就移动到了倒数第k个节点。
+
+- 代码
+
+  ```js
+  //顺序查找法
+  function getKthFromEnd(head,k){
+      let len = 0
+      let p = head
+      //首先循环链表求链表的长度
+      while(p){
+          len++
+          p = p.next
+      }
+      let q = head
+      //循环链表 同时长度递减，直到长度等于k
+      while(len){
+          if(len === k){
+              return q
+          }
+          q = q.next
+          len--
+      }
+  }
+  //双指针
+  function getKthFromEnd(head,k){
+      let slow = head
+      let fast = head
+      //将快指针指向第k+1个节点
+      for(let i=0;i<k;i++){
+          fast = fast.next
+      }
+      //同时移动快慢指针 直到快指针移动到null
+      while(fast){
+          fast = fast.next
+          slow = slow.next
+      }
+      return slow
+  }
+  ```
+
   
