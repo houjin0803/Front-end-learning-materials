@@ -1,3 +1,135 @@
+# 排序算法
+
+## 1、冒泡排序
+
+- 冒泡排序原理
+
+  假设数组有`n`个数，将数组里面的数按照从小到大的顺序进行排列，那么按照冒泡排序的原理：从第一个数开始进行**相邻**的两个数的比较，左边的数比右边的数大的话，就将左边的数右移，然后又接着比较下面两个相邻的数，重复此步骤，那么经过第一趟排序，就会将最大的数放在最后，第二趟将倒数第二大的数归位，以此类推。**如果有`n`个数，就会进行`n-1`趟排序**。可以看如下动态图：
+
+<img src="https://img-blog.csdnimg.cn/20210611113132421.gif#pic_center" alt="img"  />
+
+- 代码
+
+  ```js
+  function bubble(a){
+      let len = a.length
+      //第一层for循环是需要的趟数
+      for(let i=0;i<len-1;i++){
+          //第二层for循环是 每一趟需要交换相邻的元素
+          for(let j=0;j<len-1-i;j++){
+              if(a[j]>a[j+1]){
+              	[a[j],a[j+1]]=[a[j+1],a[j]]                
+              }
+          }
+      }
+  }
+  ```
+
+- 改进1
+
+  假设在进行第三轮的时候发现数组已经是有序了，此时已经没有必要再进行下一趟的循环了，所以我们可以设置一个布尔变量`isSorted`。每一趟设置初始值为`true`，如果有元素交互则设置为`false`，当第二个for循环结束后，如果`isSorted`为true，代表本趟没有交换元素，说明数组已经有序了，可以跳出第一层for循环。代码如下：
+
+  ```js
+  function bubble(a){
+      let len = a.length
+      for(let i=0;i<len-1;i++){
+          let isSorted = true
+          for(let j=0;j<len-1-i;j++){
+              if(a[j]>a[j+1]){
+                  [a[j],a[j+1]] = [a[j+1],a[j]]
+                  isSorted = false
+              }
+          }
+          if(isSorted){
+              break;
+          }
+      }
+  }
+  ```
+
+- 改进2
+
+  假设数组前半部分无序，后半部分有序比如`[3,4,2,1,5,6,7,8]`。这种情况和上面一种是不一样的，这种情况每一轮都有数据进行移动，此时我们可以在每一轮排序的最后，记录一下最后一次元素交互的位置，那么这个位置就是无序数组的边界，再往后就是有序区。
+
+  ```js
+  function bubble(a){
+      let len = a.length
+      //记录最后
+      let lastExchangeIndex  = 0
+      let sortBorder = len-1
+      for(let i=0;i<lastExchangeIndex;i++){
+          let isSorted = true
+          for(let j=0;j<sortBorder;j++){
+              if(a[j]>a[j+1]){
+                  [a[j],a[j+1]] = [a[j+1],a[j]]
+                  isSorted = false
+                  lastExchangeIndex = j
+              }
+          }
+          sortBorder = lastExchangeIndex
+          if(isSorted){
+              break;
+          }
+      }
+  }
+  ```
+
+- 时间复杂度
+
+  冒泡排序的时间复杂度为$O(n^2)$，是一种稳定排序，因为在两个数交换的时候，如果两个数相同，那么它们并不会因为算法中哪条语句相互交换位置。
+
+## 2、快速排序
+
+- 快速排序思想
+
+  1）选择一个基准元素Pivot，一般是选择数组的第一个元素
+
+  2）将大于Pivot的数字放在Pivot的右边
+
+  3）将小于Pivot的数字放在Pivot左边
+
+  4）分别对左右子序列重复以上步骤
+
+- 具体做法
+
+  1）选取数组的第一个元素作为基准元素Pivot
+
+  2）建立两端的指针，左侧的指针指向数组的第一个元素，右侧的指针指向数组的最后一个元素
+
+  3）右侧指针的当前值和Pivot进行比较，如果小于Pivot的值，则将右侧指针对应的值赋值给左侧指针指向的值；否则右侧指针一直往左移动
+
+  4）左侧指针的当前值和Pivot进行比较，如果大于Pivot的值，则将左侧指针对应的值赋值给右侧指针指向的值，否则左侧指针一直往右移动
+
+  5）当两个指针相遇时，说明本轮比较结束，将基准元素Pivot赋值给当前指针指向的位置。
+
+- 代码
+
+  ```js
+  function quickSort(a,begin,end){
+      if(begin>end){
+          return
+      }
+      let left = begin
+      let right = end
+      let pivot = a[left]
+      while(left<right){
+          while(a[right] > pivot && left < right){
+              right--
+          }
+          a[left] = a[right]
+          while(a[left]<pivot && left < right){
+              left++
+          }
+          a[right] = a[left]
+      }
+      a[left] = pivot
+      quickSort(a,begin,left-1)
+      quickSort(a,right+1,end)
+  }
+  ```
+
+
+
 # 一、链表
 
 什么是链表？链表就是通过指针将节点连接在一起的线性结构。每一个节点由两部分组成：数据域和指针域（存放下一个节点的指针），最后一个指针指向null（空指针的意思），如下所示：
@@ -106,6 +238,53 @@
           slow = slow.next
       }
       return slow
+  }
+  ```
+
+  ## 4、相交链表
+
+- 链接：https://leetcode-cn.com/problems/intersection-of-two-linked-lists/submissions/
+
+- 思路
+
+  本题的一个思路就是先求出链表A和链表B的长度，假设为`lenA、lenB` ,为后面的处理起来方便，我们始终让A的长度大于B的，即lenA>lenB。如果lenA<lenB，那么就交换A、B两个链表，同时长度也进行交换。然后计算A和B长度的差值，让指向A链表的指针向前移动差值这个距离，如下所示。然后让curA和curB同时往后移动，如果两个指针相等，则直接返回当前这个指针。如果不相等，一直往后移动，移动到链表结尾还没有找到相等的，则说明两个链表没有相交的节点，返回`null
+
+  ![img](https://code-thinking.cdn.bcebos.com/pics/%E9%9D%A2%E8%AF%95%E9%A2%9802.07.%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4_2.png)
+
+- 代码
+
+  ```js
+  var getNodeLength(head){
+      let len = 0
+      let cur = head
+      while(cur){
+          cur = cur.next
+          len++
+      }
+      return len
+  }
+  var getIntersectionNode =function(headA,headB){
+      let curA = headA
+      let curB = headB
+      let lenA = getNodeLength(headA)
+      let lenB = getLength(headB)
+      if(lenA < lenB){
+          [lenA,lenB] = [lenB,lenA];
+          [headA,headB] = [headN,headA]
+      }
+      let i = lenA-lenB
+      while(i){
+          curA = curA.next
+          i--
+      }
+      while(curA){
+          if(curA === curB){
+              return curA
+          }
+          curA = curA.next
+          curB = curB.next
+      }
+      return null
   }
   ```
 
