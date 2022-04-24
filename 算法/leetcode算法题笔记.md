@@ -128,8 +128,6 @@
   }
   ```
 
-
-
 # 一、链表
 
 什么是链表？链表就是通过指针将节点连接在一起的线性结构。每一个节点由两部分组成：数据域和指针域（存放下一个节点的指针），最后一个指针指向null（空指针的意思），如下所示：
@@ -267,10 +265,10 @@
       let curA = headA
       let curB = headB
       let lenA = getNodeLength(headA)
-      let lenB = getLength(headB)
+      let lenB = getNodeLength(headB)
       if(lenA < lenB){
           [lenA,lenB] = [lenB,lenA];
-          [headA,headB] = [headN,headA]
+          [headA,headB] = [headB,headA]
       }
       let i = lenA-lenB
       while(i){
@@ -285,6 +283,118 @@
           curB = curB.next
       }
       return null
+  }
+  ```
+
+
+## 4、链表的中间节点
+
+- 链接：https://leetcode-cn.com/problems/middle-of-the-linked-list/
+
+- 思路
+
+  **单指针法**：先求出链表的长度len，如果len是奇数的话，直接取`len/2`的整数部分加上1，如果len是偶数的话，取`len/2 +1`，然后用p指针指向头结点，遍历链表，直到遍历到中间的节点为止。
+
+  **双指针法**：设置快慢指针slow和fast，慢指针每次移动一个距离，快指针每次移动两个距离，当快指针移动到null的位置时，慢指针就移动到了中间节点。
+
+- 代码
+
+  ```js
+  //单指针法
+  function getListLength(head){
+      let len =0
+      let cur =head
+      while(cur){
+          cur = cur.next
+          len++
+      }
+      return len
+  }
+  function middleNode(head){
+      let len = getListLength(head)
+      let i = Math.floor(len/2)+1
+      let cur = head
+      for(let j=0;j<i;j++){
+          cur = cur.next
+      }
+      return cur
+  }
+  //双指针法
+  function middleNode(head){
+      let slow = head
+      let fast = head
+      while(fast && fast.next){
+          fast = fast.next.next
+          slow = slow.next
+      }
+      return slow
+  }
+  ```
+
+  ## 
+
+## 5、回文链表
+
+- 链接：https://leetcode-cn.com/problems/palindrome-linked-list/
+
+- 思路
+
+  **将链表中的值复制到数组中去，然后通过数组进行判断**：通过遍历链表，将当前节点的数值存放在数组a中去，然后确定a是否是会问，这里可以使用双指针，一个指针从起点开始往中间移动，另一个指针从终点开始向中间移动，看头尾指针指向的数是否相等，只要不相等，就返会false，当首位指针相遇，结束遍历，此时说明数组中的数是会问的，返回true。
+
+- 代码
+
+  ```js
+  //将链表中的值复制到数组中去，然后通过数组进行判断
+  function isPalindrome(head){
+      let a = []
+      let cur = head
+      while(cur){
+          a.push(cur.val)
+          cur  = cur.next
+      }
+      for(let i=0,j =a.length-1;i<=j;i++,j--){
+          fi(a[i] !== a[j]){
+              return false
+          }
+      }
+      return true
+  }
+  ```
+
+## 6、删除链表中的倒数第N个结点
+
+- 链接：https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
+
+- 思路
+
+  其实这道题和查找链表中的第K个节点很像 ，查找链表中的第K个节点，是需要找到第K个节点，而删除第K个节点是需要找到倒数第K+1个节点，然后将此节点的指针指向下个节点的指针所指向的节点即可。因此，我们只需要找到倒数第K+1个节点，我么可以创建一个虚拟头结点，然后让fast和slow指针指向虚拟头结点，接着让fast先前走n+1步，因为只有当fast向前走n+1步的时候，fast和slow之间的距离才是n+1，然后当fast移动到null的时候，slow就会移动到删除节点的上一个节点。如下所示：假设删除倒数第2个节点，那么当fast移动到链表的尾部时，slow就移动到了第二个节点，也就是删除节点的上一个节点，此时只需要将第二个节点指针指向第4个节点即可。
+
+  ![img](https://code-thinking.cdn.bcebos.com/pics/19.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B91.png)
+
+- 代码
+
+  ```js
+  /*
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  
+  function removeNthFromEnd(head,n){
+      let ret = new ListNode(0,head)
+      let slow = ret
+      let fast = ret
+      for(i=0;i<n;i++){
+          fast = fast.next
+      }
+      while(fast.next){
+          fast = fast.next
+          slow = slow.next
+      }
+      slow.next =slow.next.next
+      return ret.next
   }
   ```
 
